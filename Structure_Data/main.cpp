@@ -1,34 +1,44 @@
 #include <iostream>
-#include "ctime"
 #include "clocale"
 using namespace std;
 
+int Euclid(int a, int b, int& x, int& y) {
+    if (b == 0) {
+        x = 1;
+        y = 0;
+        return a;
+    }
+
+    int x1, y1;
+    int gcd = Euclid(b, a % b, x1, y1);
+    x = y1;
+    y = x1 - (a / b) * y1;
+
+    return gcd;
+}
+
+int mod(int a, int n) {
+    int x, y;
+    int gcd = Euclid(a, n, x, y);
+    if (gcd != 1) {
+        cerr << 0 << endl;
+        return -1;
+    }
+
+    return (x % n + n) % n;
+}
 
 int main() {
-    setlocale(0,"Rus");
-    double seconds;
-    time_t start,end;
-    bool t = true;
-    int a,n,timeS,timeE;
-
-    cout << "Ââåäèòå a:";
+    setlocale(LC_ALL, "rus");
+    int a, n;
     cin >> a;
-    cout << "Ââåäèòå n: ";
     cin >> n;
-    time(&start);
-    for (int b=0;b<=a;b++){
-        if( ((a * b) % n ) == 1){
-            cout << b <<" - Çíà÷åíèå îáðàòíîãî  ýëåìåíòà ê ÷èñëó a â êîëüöå âû÷åòîâ ïî ìîäóëþ n"<< endl;
-            t = false;
-            break;
-        }
+
+    int inv = mod(a, n);
+    if (inv != -1) {
+        cout << inv << endl;
     }
-    if(t){
-        cout << 0<<" Îáðàòíîãî  ýëåìåíòà ê ÷èñëó a â êîëüöå âû÷åòîâ ïî ìîäóëþ n íå ñóùåñòâóåò" << endl;
-    }
-    time(&end);
-    seconds = difftime(end,start);
-    cout<<seconds<<" - Äëèòåëüíîñòü ðàáîòû â ñåêóíäàõ"<<endl;
-    cout<<"Êîðíþõèí Âèêòîð Ñåðãååâè÷\n09.03.04-ÐÏÈá-î23";
+    cout << "Корнюхин Виктор Сергеевич\n090304-РПИб-023";
+
     return 0;
 }
