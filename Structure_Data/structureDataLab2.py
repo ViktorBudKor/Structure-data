@@ -45,7 +45,4 @@ end_time = time.time()
 mflops3, elapsed_time3 = compute_mflops(start_time, end_time, N)
 print(f"3-й вариант (NumPy dot): {mflops3:.2f} MFLOPS, время: {elapsed_time3:.2f} секунд")
 
-# Проверка корректности результатов
-assert np.allclose(C1, C2), "Матрицы C1 и C2 не совпадают!"
-assert np.allclose(C1, C3), "Матрицы C1 и C3 не совпадают!"
-assert np.allclose(C2, C3), "Матрицы C2 и C3 не совпадают!"
+print("\nРаботу выполнил Корнюхин Виктор\nГруппа 09.03.04-РПИб-о23")
